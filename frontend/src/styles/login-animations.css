@@ -1,0 +1,127 @@
+/* =========================================================
+   ParkNova — login page animations
+   ========================================================= */
+
+@keyframes pn-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pn-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pn-pop-in {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes pn-shake-x {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+@keyframes pn-draw-circle {
+  from { stroke-dashoffset: 182; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pn-draw-check {
+  from { stroke-dashoffset: 40; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pn-scale-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Visual side entrance */
+.pn-anim-visual {
+  animation: pn-fade-in 0.5s ease both;
+}
+.pn-anim-dot {
+  animation: pn-pop-in 0.4s ease both;
+  animation-delay: var(--pop-delay, 0s);
+}
+
+/* Form side entrance + staggered items */
+.pn-anim-form-wrap {
+  animation: pn-fade-in 0.35s ease both;
+}
+.pn-anim-item {
+  opacity: 0;
+  animation: pn-fade-slide-up 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+/* Field focus micro-interaction */
+.pn-field input {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.pn-field input:focus {
+  transform: translateY(-1px);
+}
+
+/* Button press feedback */
+.pn-button-primary,
+.pn-button-google {
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+}
+.pn-button-primary:active {
+  transform: translateY(2px) scale(0.99);
+}
+.pn-button-google:active {
+  transform: scale(0.98);
+}
+
+/* Error shake + fade-in */
+.pn-shake {
+  animation: pn-shake-x 0.4s ease;
+}
+.pn-anim-error {
+  animation: pn-fade-slide-up 0.25s ease both;
+}
+
+/* Success state */
+.pn-anim-success {
+  animation: pn-fade-in 0.3s ease both;
+}
+.pn-success-check {
+  display: block;
+  margin: 0 0 20px;
+  overflow: visible;
+}
+.pn-success-check-circle {
+  stroke: var(--green, #10a574);
+  stroke-dasharray: 182;
+  stroke-dashoffset: 182;
+  animation: pn-draw-circle 0.5s ease forwards;
+}
+.pn-success-check-mark {
+  stroke: var(--green, #10a574);
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: pn-draw-check 0.35s ease forwards;
+  animation-delay: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-anim-visual,
+  .pn-anim-dot,
+  .pn-anim-form-wrap,
+  .pn-anim-item,
+  .pn-shake,
+  .pn-anim-error,
+  .pn-anim-success,
+  .pn-success-check-circle,
+  .pn-success-check-mark {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
